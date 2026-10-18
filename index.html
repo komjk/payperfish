@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PayPerFish | Exclusive catches. Zero filters.</title>
+<meta name="description" content="The subscription site for people who fish. A meme. Watch thcxducky live.">
+<meta name="theme-color" content="#0b1214">
+<meta property="og:title" content="PayPerFish">
+<meta property="og:description" content="Exclusive catches. Zero filters. A meme site starring thcxducky.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40' fill='none' stroke='%233fd0c0' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 20C11 8 26 8 33 20 26 32 11 32 4 20Z'/%3E%3Cpath d='M33 20L38 14M33 20L38 26'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Bricolage+Grotesque:wght@800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b1214;--fg:#e8f0ef;--muted:#8ea3a2;--line:#1f2e30;--outline:#2c4044;--soft:#131d20;
+  --accent:#087f73;--accentText:#3fd0c0;--accentSoft:#12302d;--ok:#4fd08a;--rsvBg:#f1c96a;--rsvFg:#1a2b2b;
+}
+html[data-theme="light"]{
+  --bg:#ffffff;--fg:#1a2b2b;--muted:#5f7070;--line:#e3e9e9;--outline:#cfd9d9;--soft:#f3f6f6;
+  --accentText:#087f73;--accentSoft:#e6f4f2;--ok:#1a8a4e;--rsvBg:#1a2b2b;--rsvFg:#f1c96a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:'DM Sans',system-ui,sans-serif;font-size:16px;line-height:1.5}
+body.locked{overflow:hidden}
+a{color:var(--accentText)}
+a:hover{opacity:.85}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accentText);outline-offset:2px}
+.ic{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.sr{position:absolute;left:-9999px}
+
+/* layout */
+.shell{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,680px) 340px;justify-content:center;align-items:start}
+.rail{position:sticky;top:0;padding:20px 16px;display:flex;flex-direction:column;gap:6px}
+.brand{display:flex;align-items:center;gap:10px;padding:8px 14px 22px;text-decoration:none;color:var(--fg)}
+.brand span{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:22px;letter-spacing:-.5px}
+.brand .ic{width:34px;height:34px;stroke:var(--accentText);stroke-width:2.6}
+.nav{display:flex;align-items:center;gap:16px;padding:12px 14px;border-radius:10px;font-weight:500;color:var(--fg);text-decoration:none}
+.nav.on{font-weight:700;color:var(--accentText);background:var(--accentSoft)}
+.cta{margin-top:14px;text-align:center;background:var(--accent);color:#fff;font-weight:700;letter-spacing:1px;padding:14px;border-radius:999px;text-decoration:none;border:0;cursor:pointer;font-size:16px}
+.center{border-left:1px solid var(--line);border-right:1px solid var(--line);min-width:0}
+.right{padding:20px 24px;display:flex;flex-direction:column;gap:22px}
+
+/* header */
+.top{display:flex;align-items:center;gap:14px;padding:12px 20px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:5}
+.top h1{margin:0;font-size:18px;display:flex;align-items:center;gap:6px;line-height:1.2}
+.top small{display:block;font-size:13px;color:var(--muted);font-weight:400}
+.ver{width:18px;height:18px;fill:var(--accentText);stroke:none;flex:none}
+.ver path{fill:none;stroke:var(--bg);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.themebtn{margin-left:auto;min-height:44px;display:inline-flex;align-items:center;gap:8px;padding:0 16px;border:1px solid var(--outline);border-radius:999px;background:transparent;font-weight:700;font-size:13px;letter-spacing:.5px;cursor:pointer}
+.themebtn .ic{width:18px;height:18px}
+.sun{display:none}
+html[data-theme="light"] .sun{display:block}
+html[data-theme="light"] .moon{display:none}
+
+/* cover + identity */
+.cover{height:200px;overflow:hidden;background:#0d1a14}
+.cover svg{display:block;width:100%;height:200px}
+.idrow{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;padding:0 20px}
+.avwrap{position:relative;margin-top:-52px}
+.av{width:104px;height:104px;border-radius:50%;background:var(--accent);border:4px solid var(--bg);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:34px;color:#fff}
+.dot{position:absolute;right:6px;bottom:6px;width:18px;height:18px;border-radius:50%;background:#2fbf71;border:3px solid var(--bg)}
+.acts{display:flex;gap:10px;padding:12px 0}
+.rbtn{height:44px;min-width:44px;border:1px solid var(--outline);border-radius:999px;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 12px;background:transparent;color:var(--fg);cursor:pointer;text-decoration:none;font-weight:700;font-size:14px}
+.rbtn .ic{width:20px;height:20px}
+.rbtn.wide{padding:0 16px}
+.about{padding:4px 20px 0;display:flex;flex-direction:column;gap:6px}
+.name{display:flex;align-items:center;gap:8px;font-weight:700;font-size:24px}
+.name .ver{width:22px;height:22px}
+.handle{color:var(--muted);font-size:15px}
+.handle b{color:var(--ok);font-weight:500}
+.bio{font-size:16px;line-height:1.55;padding-top:10px;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;padding-top:8px;font-size:14px;color:var(--muted)}
+.meta span,.meta a{display:inline-flex;align-items:center;gap:6px}
+.meta .ic{width:16px;height:16px}
+.meta a{font-weight:500;text-decoration:none}
+
+/* subscription */
+.sub{padding:28px 20px 8px;display:flex;flex-direction:column;gap:14px}
+.label{font-size:13px;font-weight:700;letter-spacing:1px;color:var(--muted)}
+.sub .label+.pill{margin-top:0}
+.pill{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;background:var(--accent);color:#fff;border:0;width:100%;padding:16px 24px;border-radius:999px;font-weight:700;font-size:16px;cursor:pointer;text-align:left}
+.pill .l{letter-spacing:1px}
+.pill .l em{font-style:normal;font-weight:500;opacity:.9}
+.pill.rsv{background:var(--rsvBg);color:var(--rsvFg)}
+.note{font-size:14px;color:var(--muted);text-align:center;margin:0}
+.gap-t{padding-top:12px}
+
+/* tabs */
+.tabs{display:flex;margin-top:18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tab{flex:1;text-align:center;padding:16px 0;font-weight:700;letter-spacing:1px;font-size:14px;color:var(--muted);background:none;border:0;border-bottom:3px solid transparent;cursor:pointer}
+.tab[aria-selected="true"]{color:var(--accentText);border-bottom-color:var(--accentText)}
+
+/* posts */
+.post{padding:20px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:14px}
+.post:last-child{border-bottom:0}
+.pin{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;letter-spacing:1px;color:var(--muted)}
+.pin .ic{width:14px;height:14px;fill:currentColor;stroke:none}
+.ph{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.who{display:flex;align-items:center;gap:12px}
+.mini{width:46px;height:46px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+.who b{display:block;line-height:1.2}
+.who small,.when{font-size:13px;color:var(--muted)}
+.post p{margin:0;font-size:16px;line-height:1.55}
+.media{position:relative;aspect-ratio:16/10;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.m0{background:linear-gradient(180deg,#1c6e7a,#0d2a33)}
+.m1{background:radial-gradient(circle at 50% 60%,#3f7d8a,#12303a 85%)}
+.m2{background:radial-gradient(circle at 50% 60%,#6a8a4e,#1a2c18 85%)}
+.m3{background:radial-gradient(circle at 50% 60%,#5a4a7e,#14101e 85%)}
+.fish{width:46%;fill:#f1c96a}
+.blur{filter:blur(12px);opacity:.8}
+.m2 .fish{fill:#fff;opacity:.7}
+.m3 .fish{opacity:.6}
+.veil{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(10,25,28,.45);color:#fff;border:0;width:100%;cursor:pointer;font-size:16px;font-weight:700}
+.veil .ic{width:34px;height:34px}
+.m3 .veil{background:rgba(10,10,20,.55);color:#f1c96a}
+.badge{position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,.6);color:#fff;font-size:13px;font-weight:700;padding:4px 10px;border-radius:6px}
+.bar{display:flex;align-items:center;justify-content:space-between;color:var(--muted)}
+.bar .l{display:flex;align-items:center;gap:6px}
+.ib{background:none;border:0;padding:10px;border-radius:999px;color:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:6px;min-height:44px;min-width:44px;justify-content:center;font-weight:700;font-size:13px;letter-spacing:1px}
+.ib[aria-pressed="true"]{color:#e0527a}
+.ib[aria-pressed="true"] .ic{fill:#e0527a}
+
+/* right column */
+.search{width:100%;padding:13px 18px;border:1px solid var(--outline);border-radius:999px;font:inherit;font-size:15px;background:var(--soft);color:var(--fg)}
+.stream{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--bg)}
+.sh{display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+.live{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;letter-spacing:1px}
+.live i{width:9px;height:9px;border-radius:50%;background:#e0523f;display:inline-block}
+.sh span{font-size:13px;color:var(--muted)}
+.player{aspect-ratio:16/9;background:linear-gradient(180deg,#1c6e7a,#0d2a33);display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;font-size:14px;padding:10px}
+.player iframe{width:100%;height:100%;border:0;display:block}
+.stream .wt{display:block;text-align:center;padding:12px;font-weight:700;font-size:14px;text-decoration:none;border-top:1px solid var(--line)}
+.sugg{display:flex;flex-direction:column;gap:14px}
+.sg{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sg .who{min-width:0;gap:10px}
+.sg .mini{width:42px;height:42px;font-size:14px}
+.sg small{display:block;color:var(--muted)}
+.sbtn{border:1px solid var(--accentText);color:var(--accentText);background:none;font-weight:700;font-size:13px;letter-spacing:.5px;padding:10px 14px;border-radius:999px;cursor:pointer;min-height:44px}
+.foot{font-size:12px;line-height:1.6;color:var(--muted);padding-top:8px;border-top:1px solid var(--line)}
+.foot p{margin:0}
+.leafrow{display:flex;align-items:center;gap:8px;min-height:44px}
+.leaf{background:none;border:0;padding:10px;cursor:pointer;opacity:.3;line-height:0}
+.leaf .ic{fill:var(--accentText);stroke:var(--accentText);width:22px;height:22px;stroke-width:1.4}
+.leaf:hover{opacity:.7}
+.found{font-style:italic;color:var(--accentText);font-size:14px}
+.mobslot{display:none;padding:20px}
+
+/* banner, toast, dialogs */
+.banner{display:none;background:var(--accentSoft);color:var(--accentText);text-align:center;padding:10px 16px;font-weight:700;font-size:14px}
+.banner.show{display:block}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--fg);color:var(--bg);padding:12px 20px;border-radius:999px;font-weight:500;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:50;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+dialog{border:1px solid var(--outline);border-radius:16px;background:var(--bg);color:var(--fg);padding:28px;max-width:420px;width:calc(100% - 32px)}
+dialog::backdrop{background:rgba(0,0,0,.65)}
+dialog h2{margin:0 0 8px;font-family:'Bricolage Grotesque',sans-serif;font-size:26px;letter-spacing:-.5px}
+dialog p{margin:0 0 20px;color:var(--muted)}
+.dact{display:flex;flex-wrap:wrap;gap:10px}
+.dact .cta{margin:0;flex:1 1 auto}
+.ghost{flex:1 1 auto;padding:14px;border-radius:999px;border:1px solid var(--outline);background:none;font-weight:700;cursor:pointer;font-size:16px}
+.gate{position:fixed;inset:0;z-index:100;background:radial-gradient(ellipse at 70% 20%,#1b2a1e,#0b1214 65%);display:none;align-items:center;justify-content:center;padding:24px;text-align:center;color:#e8f0ef}
+.gate.show{display:flex}
+.gate .box{max-width:460px;display:flex;flex-direction:column;align-items:center;gap:18px}
+.gate .badge21{border:2px solid #f1c96a;color:#f1c96a;font-weight:800;font-size:28px;padding:6px 16px;border-radius:8px;letter-spacing:1px}
+.gate h2{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-size:40px;line-height:1.05;letter-spacing:-1px}
+.gate p{margin:0;color:#8ea3a2}
+.gate .dact{justify-content:center;width:100%}
+.gate .cta{background:#f1c96a;color:#1a2b2b}
+.gate .ghost{color:#e8f0ef;border-color:#2c4044}
+
+/* responsive */
+@media (max-width:1100px){
+  .shell{grid-template-columns:minmax(0,680px)}
+  .rail{display:none}
+  .center{border-left:0;border-right:0}
+  .right{padding:20px}
+  .mobslot{display:block}
+  .deskslot{display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.toast{transition:none}}
+</style>
+</head>
+<body>
+
+<!-- icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<symbol id="i-hook" viewBox="0 0 40 40"><path d="M4 20C11 8 26 8 33 20 26 32 11 32 4 20Z"/><path d="M33 20L38 14M33 20L38 26"/><circle cx="12" cy="18" r="1.5"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9H4z"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0 1 12 0v6l2 2H4zM10 21h4"/></symbol>
+<symbol id="i-msg" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4h14v17l-7-4-7 4z"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-4 3-6 7-6s7 2 7 6M17 5a3.5 3.5 0 0 1 0 7M19 14c2 1 3 3 3 6"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.5 3.5-7 8-7s8 2.5 8 7"/></symbol>
+<symbol id="i-dots" viewBox="0 0 24 24"><circle cx="6" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="18" cy="12" r="1.2"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.8 5.8 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.3l1-6.2L3 9.7l6.2-.9z"/></symbol>
+<symbol id="i-share" viewBox="0 0 24 24"><path d="M12 15V4M7 8l5-5 5 5M5 13v7h14v-7"/></symbol>
+<symbol id="i-tip" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5c-.5-1-1.4-1.5-2.5-1.5-1.4 0-2.5.8-2.5 2s1 1.7 2.5 2 2.5.8 2.5 2-1.1 2-2.5 2c-1.1 0-2-.5-2.5-1.5M12 6.5V8M12 16v1.5"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10Z"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M5 5h14v10H10l-5 4V5Z"/></symbol>
+<symbol id="i-bm" viewBox="0 0 24 24"><path d="M6 4h12v17l-6-4-6 4z"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M12 22V13"/><path d="M12 13C9 11 7 7 12 2c5 5 3 9 0 11Z"/><path d="M11 14C7 14 4 12 3 8c4 0 7 1 8 6Z"/><path d="M13 14c4 0 7-2 8-6-4 0-7 1-8 6Z"/></symbol>
+<symbol id="i-fish" viewBox="0 0 120 60"><path d="M10 30C30 5 75 5 95 30 75 55 30 55 10 30Z M95 30L118 12 112 30 118 48Z"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" style="fill:var(--accentText);stroke:none"/><path d="M7 12.5l3.2 3.2L17 9" style="fill:none;stroke:var(--bg);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"/></symbol>
+</defs>
+</svg>
+
+<div class="banner" id="banner" role="status">It's 4:20. The stream is probably rolling.</div>
+
+<div class="shell">
+
+<!-- LEFT RAIL -->
+<nav class="rail" aria-label="Main">
+<a class="brand" href="#top"><svg class="ic"><use href="#i-hook"/></svg><span>PayPerFish</span></a>
+<a class="nav" href="#top"><svg class="ic"><use href="#i-home"/></svg>Home</a>
+<a class="nav" href="#top"><svg class="ic"><use href="#i-bell"/></svg>Notifications</a>
+<a class="nav" href="#top"><svg class="ic"><use href="#i-msg"/></svg>Messages</a>
+<a class="nav" href="#top"><svg class="ic"><use href="#i-book"/></svg>Collections</a>
+<a class="nav" href="#top"><svg class="ic"><use href="#i-users"/></svg>Subscriptions</a>
+<a class="nav on" href="#top" aria-current="page"><svg class="ic"><use href="#i-user"/></svg>My profile</a>
+<a class="nav" href="#top"><svg class="ic"><use href="#i-dots"/></svg>More</a>
+<button class="cta" type="button" data-gotcha="Nothing to post here. The only person who posts is the one in the stream below.">NEW CATCH</button>
+</nav>
+
+<!-- CENTER -->
+<main class="center" id="top">
+
+<header class="top">
+<svg class="ic" aria-hidden="true"><use href="#i-back"/></svg>
+<h1>thcxducky <svg class="ver" aria-label="Verified" role="img"><use href="#i-check"/></svg>
+<small id="postcount">420 posts &middot; 42 videos</small></h1>
+<button class="themebtn" id="themebtn" type="button" aria-label="Switch theme">
+<svg class="ic moon"><use href="#i-moon"/></svg><svg class="ic sun"><use href="#i-sun"/></svg><span id="themelabel">DARK</span></button>
+</header>
+
+<div class="cover" aria-hidden="true">
+<svg viewBox="0 0 1200 200" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16314a"/><stop offset=".7" stop-color="#e48a5a"/><stop offset="1" stop-color="#f3c27a"/></linearGradient></defs>
+<rect width="1200" height="200" fill="url(#sky)"/>
+<circle cx="860" cy="120" r="46" fill="#fff3d0" opacity=".95"/>
+<path d="M0 140 L140 100 L260 135 L400 90 L540 140 L700 110 L860 145 L1020 105 L1200 140 L1200 200 L0 200Z" fill="#1d3a33"/>
+<rect y="150" width="1200" height="50" fill="#102a2a"/>
+<g stroke="#fff3d0" stroke-width="2" opacity=".5" stroke-linecap="round"><path d="M810 160h100M830 172h60M790 185h140"/></g>
+<path d="M200 0 C 230 70 170 110 210 150" fill="none" stroke="#fff" stroke-width="1.5" opacity=".8"/>
+<path d="M210 150 q 6 14 -8 14 q -10 -2 -4 -10" fill="none" stroke="#fff3d0" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
+</div>
+
+<div class="idrow">
+<div class="avwrap"><div class="av" aria-hidden="true">TD</div><span class="dot" title="Available now"></span></div>
+<div class="acts">
+<button class="rbtn" type="button" aria-label="Save to favorites" data-gotcha="Favorited. Nobody will ever know."><svg class="ic"><use href="#i-star"/></svg></button>
+<button class="rbtn" type="button" aria-label="Share profile" id="sharebtn"><svg class="ic"><use href="#i-share"/></svg></button>
+<button class="rbtn" type="button" aria-label="Send message" data-gotcha="Messages are closed. Try yelling into the lake."><svg class="ic"><use href="#i-msg"/></svg></button>
+<button class="rbtn wide tipbtn" type="button" aria-label="Send a tip"><svg class="ic"><use href="#i-tip"/></svg>SEND TIP</button>
+</div>
+</div>
+
+<section class="about" aria-label="About">
+<div class="name">thcxducky <svg class="ver" aria-label="Verified" role="img"><use href="#i-check"/></svg></div>
+<div class="handle">@thcxducky &middot; <b>Available now</b></div>
+<p class="bio">Resident angler. Long casts, slow mornings and a good smoke on the dock. Streams roll around 4:20. Members get the full catch.</p>
+<div class="meta">
+<span><svg class="ic"><use href="#i-pin"/></svg>Somewhere on the water</span>
+<a href="https://www.twitch.tv/thcxducky" target="_blank" rel="noopener"><svg class="ic"><use href="#i-link"/></svg>twitch.tv/thcxducky</a>
+<span><svg class="ic"><use href="#i-tip"/></svg>Fish tipped: <b id="tipcount">0</b></span>
+</div>
+</section>
+
+<div class="mobslot" id="mobslot"></div>
+
+<section class="sub" id="subscribe" aria-label="Subscription">
+<div class="label">SUBSCRIPTION</div>
+<button class="pill" type="button" data-gotcha="Regular tier, $4.20 per month. Except it's free. This is a meme."><span class="l">SUBSCRIBE</span><span>$4.20 per month</span></button>
+<p class="note">Free to watch the stream. Cancel any time. Nobody's keeping score.</p>
+<div class="label gap-t">SUBSCRIPTION BUNDLES</div>
+<button class="pill" type="button" data-gotcha="Three months, 5% off the price of nothing."><span class="l">3 MONTHS <em>(5% off)</em></span><span>$11.97 total</span></button>
+<button class="pill" type="button" data-gotcha="Six months, 10% off the price of nothing. Commitment issues? Same."><span class="l">6 MONTHS <em>(10% off)</em></span><span>$22.68 total</span></button>
+<div class="label gap-t">RESERVE TIER</div>
+<button class="pill rsv" type="button" data-gotcha="Reserve is full. It was never open."><span class="l">JOIN RESERVE</span><span>$42 per month</span></button>
+<p class="note">Late pier sessions, a shout-out on stream, everything in Regular.</p>
+</section>
+
+<div class="tabs" role="tablist">
+<button class="tab" role="tab" aria-selected="true" type="button">420 POSTS</button>
+<button class="tab" role="tab" aria-selected="false" type="button" data-gotcha="Media tab is under construction. Like the dock.">42 MEDIA</button>
+</div>
+
+<article class="post">
+<div class="pin"><svg class="ic"><use href="#i-star"/></svg>PINNED POST</div>
+<div class="ph"><div class="who"><div class="mini" aria-hidden="true">TD</div><div><b>thcxducky</b><small>@thcxducky</small></div></div><span class="when">Free for everyone</span></div>
+<p>Welcome to the club. Free sample below. The rest of the water is for subscribers.</p>
+<div class="media m0"><svg class="fish" viewBox="0 0 120 60" aria-label="A golden fish" role="img"><use href="#i-fish"/></svg></div>
+</article>
+
+<article class="post">
+<div class="ph"><div class="who"><div class="mini" aria-hidden="true">TD</div><div><b>thcxducky</b><small>@thcxducky</small></div></div><span class="when">2 hours ago</span></div>
+<p>First light, still water. You had to be there.</p>
+<div class="media m1"><svg class="fish blur" viewBox="0 0 120 60" aria-hidden="true"><use href="#i-fish"/></svg>
+<button class="veil" type="button" data-gotcha="Nice try. The sunrise remains a mystery."><svg class="ic"><use href="#i-lock"/></svg>Subscribe to unlock</button>
+<span class="badge">1 photo</span></div>
+<div class="bar"><div class="l">
+<button class="ib like" type="button" aria-pressed="false" aria-label="Like"><svg class="ic"><use href="#i-heart"/></svg></button>
+<button class="ib" type="button" aria-label="Comment" data-gotcha="Comments are off. The fish don't read them."><svg class="ic"><use href="#i-chat"/></svg></button>
+<button class="ib tipbtn" type="button"><svg class="ic"><use href="#i-tip"/></svg>SEND TIP</button></div>
+<button class="ib" type="button" aria-label="Bookmark" data-gotcha="Bookmarked. Go touch some water."><svg class="ic"><use href="#i-bm"/></svg></button></div>
+</article>
+
+<article class="post">
+<div class="ph"><div class="who"><div class="mini" aria-hidden="true">TD</div><div><b>thcxducky</b><small>@thcxducky</small></div></div><span class="when">Yesterday</span></div>
+<p>The pike that fought back. Full story and footage inside.</p>
+<div class="media m2"><svg class="fish blur" viewBox="0 0 120 60" aria-hidden="true"><use href="#i-fish"/></svg>
+<button class="veil" type="button" data-gotcha="The pike won. That's all you get."><svg class="ic"><use href="#i-lock"/></svg>Subscribe to unlock</button>
+<span class="badge">4:20</span></div>
+<div class="bar"><div class="l">
+<button class="ib like" type="button" aria-pressed="false" aria-label="Like"><svg class="ic"><use href="#i-heart"/></svg></button>
+<button class="ib" type="button" aria-label="Comment" data-gotcha="Comments are off. The pike has opinions though."><svg class="ic"><use href="#i-chat"/></svg></button>
+<button class="ib tipbtn" type="button"><svg class="ic"><use href="#i-tip"/></svg>SEND TIP</button></div>
+<button class="ib" type="button" aria-label="Bookmark" data-gotcha="Bookmarked. The pike remembers."><svg class="ic"><use href="#i-bm"/></svg></button></div>
+</article>
+
+<article class="post">
+<div class="ph"><div class="who"><div class="mini" aria-hidden="true">TD</div><div><b>thcxducky</b><small>@thcxducky</small></div></div><span class="when">3 days ago</span></div>
+<p>Midnight on the pier. Not for the main feed.</p>
+<div class="media m3"><svg class="fish blur" viewBox="0 0 120 60" aria-hidden="true"><use href="#i-fish"/></svg>
+<button class="veil" type="button" data-gotcha="Reserve only. Reserve is imaginary. So is the pier."><svg class="ic"><use href="#i-lock"/></svg>Reserve members only</button></div>
+</article>
+
+</main>
+
+<!-- RIGHT -->
+<aside class="right" aria-label="Sidebar">
+<div>
+<label for="q" class="sr">Search anglers</label>
+<input id="q" class="search" type="search" placeholder="Search anglers">
+</div>
+
+<div class="deskslot" id="deskslot">
+<section class="stream" id="stream" aria-label="Live stream">
+<div class="sh"><div class="live"><i></i>LIVE NOW</div><span>thcxducky</span></div>
+<div class="player" id="player">Stream loads after you confirm your age.</div>
+<a class="wt" href="https://www.twitch.tv/thcxducky" target="_blank" rel="noopener">Watch on Twitch</a>
+</section>
+</div>
+
+<section class="sugg" aria-label="Suggested anglers">
+<div class="label">SUGGESTED ANGLERS</div>
+<div class="sg"><div class="who"><div class="mini" style="background:#c2693a" aria-hidden="true">RR</div><div><b>Reel Deal Rita</b><small>@reeldealrita</small></div></div><button class="sbtn" type="button" data-gotcha="Rita is not real. Neither is this subscription.">SUBSCRIBE</button></div>
+<div class="sg"><div class="who"><div class="mini" style="background:#5a4a7e" aria-hidden="true">CC</div><div><b>Catfish Carl</b><small>@catfishcarl</small></div></div><button class="sbtn" type="button" data-gotcha="Carl is also not real. He is, however, very wet.">SUBSCRIBE</button></div>
+<div class="sg"><div class="who"><div class="mini" style="background:#3f7d4e" aria-hidden="true">FF</div><div><b>Fly Fishing Frank</b><small>@flyfrank</small></div></div><button class="sbtn" type="button" data-gotcha="Frank is imaginary. His flies are not.">SUBSCRIBE</button></div>
+</section>
+
+<footer class="foot">
+<p>&copy; payperfish.com. A meme site. Not affiliated with any other subscription platform. No payments are taken here.</p>
+<p>Adults 21+. Cannabis references are for entertainment, and laws vary by location.</p>
+<div class="leafrow"><span class="found" id="found" hidden>You found it. Tight lines, friend.</span>
+<button class="leaf" id="leaf" type="button" aria-label="Hidden leaf"><svg class="ic"><use href="#i-leaf"/></svg></button></div>
+</footer>
+</aside>
+
+</div>
+
+<!-- joke dialog -->
+<dialog id="gotcha" aria-labelledby="gt">
+<h2 id="gt">Gotcha.</h2>
+<p id="gm">This is a meme. Nothing here costs anything.</p>
+<form method="dialog" class="dact">
+<a class="cta" style="margin:0;flex:1 1 auto" href="https://www.twitch.tv/thcxducky" target="_blank" rel="noopener">Take me to Twitch</a>
+<button class="ghost" value="close">Close</button>
+</form>
+</dialog>
+
+<!-- age gate -->
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gh">
+<div class="box" id="gatebox">
+<span class="badge21">21+</span>
+<h2 id="gh">Adults only. It's fishing, but still.</h2>
+<p>PayPerFish is a meme site with cannabis references. You must be 21 or older to enter.</p>
+<div class="dact">
+<button class="cta" type="button" id="yes">I'm 21 or older</button>
+<button class="ghost" type="button" id="no">Not yet</button>
+</div>
+</div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  var $ = function (s) { return document.querySelector(s); };
+  var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
+
+  /* theme */
+  var root = document.documentElement;
+  function setTheme(t) {
+    root.setAttribute('data-theme', t);
+    $('#themelabel').textContent = t === 'dark' ? 'DARK' : 'LIGHT';
+    $('#themebtn').setAttribute('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.setAttribute('content', t === 'dark' ? '#0b1214' : '#ffffff');
+  }
+  var saved = store.get('ppf_theme');
+  setTheme(saved || (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+  $('#themebtn').addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    setTheme(next); store.set('ppf_theme', next);
+  });
+
+  /* toast */
+  var toastTimer;
+  function toast(msg) {
+    var t = $('#toast');
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2600);
+  }
+
+  /* twitch player (loads after the age gate) */
+  var playerLoaded = false;
+  function loadPlayer() {
+    if (playerLoaded) return;
+    playerLoaded = true;
+    var parents = [location.hostname, 'payperfish.com', 'www.payperfish.com'];
+    var seen = {}, q = '';
+    parents.forEach(function (p) {
+      if (p && !seen[p]) { seen[p] = 1; q += '&parent=' + encodeURIComponent(p); }
+    });
+    var f = document.createElement('iframe');
+    f.src = 'https://player.twitch.tv/?channel=thcxducky&muted=true&autoplay=true' + q;
+    f.title = 'thcxducky live on Twitch';
+    f.allowFullscreen = true;
+    f.setAttribute('allow', 'autoplay; fullscreen');
+    f.setAttribute('loading', 'lazy');
+    var p = $('#player'); p.textContent = ''; p.appendChild(f);
+  }
+
+  /* move the stream card between sidebar and top of page on small screens */
+  var mq = window.matchMedia('(max-width: 1100px)');
+  function placeStream() {
+    var card = $('#stream');
+    (mq.matches ? $('#mobslot') : $('#deskslot')).appendChild(card);
+  }
+  placeStream();
+  if (mq.addEventListener) mq.addEventListener('change', placeStream); else mq.addListener(placeStream);
+
+  /* age gate */
+  var gate = $('#gate');
+  function openSite() {
+    gate.classList.remove('show');
+    document.body.classList.remove('locked');
+    loadPlayer();
+  }
+  if (store.get('ppf_21') === '1') {
+    loadPlayer();
+  } else {
+    gate.classList.add('show');
+    document.body.classList.add('locked');
+    $('#yes').focus();
+  }
+  $('#yes').addEventListener('click', function () { store.set('ppf_21', '1'); openSite(); });
+  $('#no').addEventListener('click', function () {
+    $('#gatebox').innerHTML = '<h2>Fair enough.</h2><p>Come back when you\'re 21. The fish aren\'t going anywhere.</p>';
+  });
+
+  /* joke dialog */
+  var dlg = $('#gotcha');
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-gotcha]');
+    if (!el) return;
+    $('#gm').textContent = el.getAttribute('data-gotcha');
+    if (dlg.showModal) dlg.showModal(); else toast(el.getAttribute('data-gotcha'));
+  });
+
+  /* likes */
+  $$('.like').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var on = b.getAttribute('aria-pressed') === 'true';
+      b.setAttribute('aria-pressed', on ? 'false' : 'true');
+    });
+  });
+
+  /* tip the fish */
+  var tips = parseInt(store.get('ppf_tips') || '0', 10) || 0;
+  var tipEl = $('#tipcount');
+  tipEl.textContent = tips;
+  var tipLines = [
+    'Tip sent. Nothing was charged. The fish is flattered.',
+    'Another one. Still free. Still appreciated.',
+    'The fish accepts your generosity.',
+    'Tip number %n. The fish is blushing.',
+    'You can stop. Or you can not. The fish is keeping count.'
+  ];
+  $$('.tipbtn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      tips += 1; tipEl.textContent = tips; store.set('ppf_tips', String(tips));
+      toast(tipLines[(tips - 1) % tipLines.length].replace('%n', tips));
+    });
+  });
+
+  /* share */
+  $('#sharebtn').addEventListener('click', function () {
+    var url = location.href;
+    if (navigator.share) { navigator.share({ title: 'PayPerFish', url: url }).catch(function () {}); return; }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(function () { toast('Link copied. Spread the fish.'); },
+        function () { toast('Copy the link from your address bar. The fish trusts you.'); });
+    } else { toast('Copy the link from your address bar. The fish trusts you.'); }
+  });
+
+  /* hidden leaf */
+  $('#leaf').addEventListener('click', function () {
+    var f = $('#found'); f.hidden = !f.hidden;
+  });
+
+  /* 4:20 banner */
+  (function () {
+    var d = new Date(), h = d.getHours() % 12, m = d.getMinutes();
+    if (h === 4 && m >= 20 && m < 30) $('#banner').classList.add('show');
+  })();
+})();
+</script>
+</body>
+</html>
